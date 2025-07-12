@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ٹائم ٹیبل - ماڈل سکول</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Lateef&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Lateef', serif;
+      padding: 10px;
+      background: linear-gradient(to bottom right, #f0f4f8, #d1e3f0);
+      direction: rtl;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 28px;
+      color: #2c3e50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      font-size: 18px;
+    }
+    td[contenteditable] {
+      background: #fdfde4;
+    }
+    .controls {
+      margin: 15px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #007BFF;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+      font-family: 'Lateef', serif;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    @media (max-width: 600px) {
+      table, th, td {
+        font-size: 14px;
+      }
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>ٹائم ٹیبل - گورنمنٹ ماڈل سکول</h2>
+
+  <div class="controls">
+    <button onclick="saveTimetable()">📤 محفوظ کریں</button>
+    <button onclick="loadTimetable()">📥 لوڈ کریں</button>
+    <button onclick="print()">🖨️ پرنٹ کریں</button>
+    <button onclick="downloadTable()">⬇️ ڈاؤن لوڈ کریں</button>
+    <button onclick="addNewRow()">➕ نئی قطار</button>
+  </div>
+
+  <table id="timetable">
+    <thead>
+      <tr>
+        <th>کلاس</th>
+        <th>پیر</th>
+        <th>منگل</th>
+        <th>بدھ</th>
+        <th>جمعرات</th>
+        <th>جمعہ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td contenteditable>دوسری</td><td contenteditable>اسلامیات<br>حبیب الرحمن</td><td contenteditable>معلومات عامہ<br>عبدالنبی</td><td contenteditable>اردو<br>عبدالنبی</td><td contenteditable>ریاضی<br>عبدالنبی</td><td contenteditable>اسلامیات<br>حبیب الرحمن</td></tr>
+      <tr><td contenteditable>تیسری</td><td contenteditable>ریاضی<br>عبدالنبی</td><td contenteditable>معلومات عامہ<br>عبدالنبی</td><td contenteditable>اردو<br>عبدالنبی</td><td contenteditable>S.S.T<br>عبدالنبی</td><td contenteditable>اسلامیات<br>حبیب الرحمن</td></tr>
+      <tr><td contenteditable>چوتھی A</td><td contenteditable>سائنس<br>عبدالرحمن</td><td contenteditable>اسلامیات<br>عبدالنبی</td><td contenteditable>اردو<br>عبدالنبی</td><td contenteditable>انگلش<br>عبدالرحمن</td><td contenteditable>ریاضی<br>عبدالرحمن</td></tr>
+      <tr><td contenteditable>چوتھی B</td><td contenteditable>سائنس<br>عبدالرحمن</td><td contenteditable>اردو<br>عبدالرحمن</td><td contenteditable>S.S.T<br>عبدالنبی</td><td contenteditable>اسلامیات<br>عبدالنبی</td><td contenteditable>انگلش<br>عبدالرحمن</td></tr>
+      <tr><td contenteditable>پانچویں</td><td contenteditable>سائنس<br>عبدالرحمن</td><td contenteditable>ریاضی<br>عبدالرحمن</td><td contenteditable>معیارات علوم<br>عبدالرحمن</td><td contenteditable>اردو<br>عبدالرحمن</td><td contenteditable>اسلامیات<br>عبدالنبی</td></tr>
+      <tr><td contenteditable>چھٹی</td><td contenteditable>انگریزی<br>عبدالرحمن</td><td contenteditable>قرآن<br>عبدالرحمن</td><td contenteditable>اسلامیات<br>عبدالرحمن</td><td contenteditable>ریاضی<br>جان محمد</td><td contenteditable>اردو<br>عبدالنبی</td></tr>
+      <tr><td contenteditable>ساتویں</td><td contenteditable>اردو<br>عبدالنبی</td><td contenteditable>عربی<br>دارالعلوم</td><td contenteditable>تاریخ<br>طارق خان</td><td contenteditable>قرآت<br>دارالعلوم</td><td contenteditable>اسلامیات<br>فاروق خان</td></tr>
+      <tr><td contenteditable>آٹھویں</td><td contenteditable>اسلامیات<br>فاروق خان</td><td contenteditable>تاریخ<br>طارق خان</td><td contenteditable>اردو<br>جان محمد</td><td contenteditable>عربی<br>دارالعلوم</td><td contenteditable>قرآت<br>دارالعلوم</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbz3D-dJ2HgfgEFxUxxDyHIDj_mJK7HWbUZnkRq3CfjDPoCTHLr_V93-yODGPXpDObBF/exec";
+
+    function getTableData() {
+      const rows = document.querySelectorAll("#timetable tr");
+      return Array.from(rows).map(row =>
+        Array.from(row.querySelectorAll("th, td")).map(cell => cell.innerText.trim())
+      );
+    }
+
+    function saveTimetable() {
+      const data = getTableData();
+      fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(res => alert("✅ ٹائم ٹیبل محفوظ ہو گیا"))
+        .catch(err => alert("❌ غلطی: " + err));
+    }
+
+    function loadTimetable() {
+      fetch(scriptURL)
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.querySelector("#timetable tbody");
+          tbody.innerHTML = "";
+          for (let i = 1; i < data.length; i++) {
+            const row = data[i].map(cell => `<td contenteditable>${cell}</td>`).join("");
+            tbody.innerHTML += `<tr>${row}</tr>`;
+          }
+        });
+    }
+
+    function downloadTable() {
+      const table = document.getElementById("timetable").outerHTML;
+      const blob = new Blob([table], { type: "application/vnd.ms-excel" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Timetable.xls";
+      a.click();
+    }
+
+    function addNewRow() {
+      const tbody = document.querySelector("#timetable tbody");
+      const cols = document.querySelectorAll("#timetable thead th").length;
+      let newRow = "<tr>";
+      for (let i = 0; i < cols; i++) {
+        newRow += `<td contenteditable></td>`;
+      }
+      newRow += "</tr>";
+      tbody.insertAdjacentHTML('beforeend', newRow);
+    }
+  </script>
+</body>
+</html>
